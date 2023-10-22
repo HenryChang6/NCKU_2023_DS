@@ -44,10 +44,6 @@ void Process_Order(){
     }
 }
 
-void Make_Set(int v){
-    parent[v] = -1;
-}
-
 void Initialize_sets(node_num){
     for(int i=0; i<node_num; i++) parent[i] = -1;
 }
