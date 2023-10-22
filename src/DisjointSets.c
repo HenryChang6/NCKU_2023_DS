@@ -28,7 +28,8 @@ int main(int argc, char* argv[]) {
 
 void Process_Order(){
     int target1, target2;
-    char operation[5];
+    //C字串結束要有一個 '/0'之類的 所以至少要開到6rrr
+    char operation[6];
     scanf("%s", operation);
     if(strcmp(operation,"find") == 0){
         scanf("%d", &target1);
