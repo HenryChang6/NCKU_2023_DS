@@ -56,6 +56,7 @@ int Find(int target){
 void Union(int target1, int target2){
     int root1 = Find(target1), root2 = Find(target2);
     // -2 < -1 高度是rooot1 > root2
+    if(root1 == root2) return;
     if(parent[root1] < parent[root2]){
         parent[root2] = root1;
     }
