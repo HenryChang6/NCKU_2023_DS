@@ -34,16 +34,17 @@ void Kruskals_Algorithm(int edges[][3]){
     //初始化 共graph_vertexes個 僅含一個元素的set 
     Initial_sets(graph_vertexes);
     //開始進行Kruskal's method 一個一個邊找 共找vertex數量 - 1個邊
-    for(int i=0; i<mst_edges; i++){
+    for(int i=0; i<mst_edges;i++){
         //因為已經排序過了 index越小 cost就會越小 所以可以用for迴圈從index = 0開始找
         int tmp_source = Find_Parent(edges[i][0]), tmp_destination = Find_Parent(edges[i][1]), tmp_cost = edges[i][2];
         //如果這兩個的parent不同 代表他們在不同的disjoint set 這條edge就是可以使用的
         //如果這兩個parent相同 就代表他們已經在同一個set 又因set經過path compression（若n個node 一定是n-1條edges）所以再加一條邊就一定會變cycle
         if(tmp_source != tmp_destination){
-            printf("%d------>%d weight:%d\n",edges[i][0],edges[i][1],edges[i][0]);
             Union(tmp_source, tmp_destination);
             min_cost += tmp_cost;
+            continue;
         } 
+        mst_edges++;
     }
 }
 
