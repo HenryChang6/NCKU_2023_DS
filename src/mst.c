@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #define MAX_VERTEX 1000001
 
 int graph_vertexes, graph_edges, mst_edges;
@@ -39,6 +40,7 @@ void Kruskals_Algorithm(int edges[][3]){
         //如果這兩個的parent不同 代表他們在不同的disjoint set 這條edge就是可以使用的
         //如果這兩個parent相同 就代表他們已經在同一個set 又因set經過path compression（若n個node 一定是n-1條edges）所以再加一條邊就一定會變cycle
         if(tmp_source != tmp_destination){
+            printf("%d------>%d weight:%d\n",edges[i][0],edges[i][1],edges[i][0]);
             Union(tmp_source, tmp_destination);
             min_cost += tmp_cost;
         } 
@@ -46,9 +48,7 @@ void Kruskals_Algorithm(int edges[][3]){
 }
 
 int Comparitor_4_Edges(const void* a, const void* b){
-    const int(*x)[3] = a; 
-    const int(*y)[3] = b; 
-    return (*x)[2] - (*y)[2]; 
+    return (((int *)a)[2] - ((int *)b)[2]);
 }
 
 void Initial_sets(int vertex_num){
@@ -62,8 +62,8 @@ int Find_Parent(int target){
 
 void Union(int target1, int target2){
     int root1 = Find_Parent(target1), root2 = Find_Parent(target2);
-    if(root1 == root2) return;
+    if(root1 == root2)                   return;
     if(rank[root1] < rank[root2])        parent[root1] = root2;
     else if(rank[root1] > rank[root2])   parent[root2] = root1;
-    else                                 rank[root2] = root1, rank[root1]++;
+    else                                 parent[root2] = root1, rank[root1]++;
 }
