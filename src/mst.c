@@ -44,6 +44,7 @@ void Kruskals_Algorithm(int edges[][3]){
             min_cost += tmp_cost;
             continue;
         } 
+        //這邊要注意rrrr DEBUG超久 如果有重複的話 mst_edges要再加一，不然會少抓邊
         mst_edges++;
     }
 }
